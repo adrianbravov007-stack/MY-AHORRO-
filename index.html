@@ -456,8 +456,7 @@ function history() {
 function exportCSV() {
   if (!state.deposits.length) return toast('No hay depósitos');
   const rows = [['Fecha', 'Ingreso', 'Cantidad'], ...state.deposits.slice().reverse().map(d => [new Date(d.date).toLocaleDateString('en-US'), d.name || 'Ingreso ' + (d.income + 1), Number(d.amount).toFixed(2)])];
-  const csv = rows.map(r => r.map(v => '"' + String(v).replaceAll('"', '""') + '"').join(',')).join('
-');
+  const csv = rows.map(r => r.map(v => '"' + String(v).replaceAll('"', '""') + '"').join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
