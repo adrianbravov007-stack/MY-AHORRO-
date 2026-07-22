@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#07130f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Meta 20K" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <title>Meta 20K</title>
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#06100c;--bg2:#0a1812;--card:rgba(17,35,27,.76);--card2:rgba(12,27,21,.92);
+      --text:#f5fff9;--muted:#9eb5a8;--line:rgba(255,255,255,.09);
+      --green:#45e58d;--green2:#a7ffd0;--gold:#ffc965;--blue:#72b7ff;--red:#ff7c7c;
+      --shadow:0 22px 70px rgba(0,0,0,.38);--radius:25px;
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text);background:
+      radial-gradient(circle at 5% -5%,rgba(69,229,141,.22),transparent 34%),
+      radial-gradient(circle at 100% 10%,rgba(255,201,101,.13),transparent 28%),
+      linear-gradient(180deg,var(--bg),#030806 75%);padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+    button,input{font:inherit}
+    button{touch-action:manipulation}
+    .app{max-width:1120px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 14px 24px}
+    .glass{background:linear-gradient(145deg,rgba(20,43,33,.89),rgba(8,20,15,.88));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+    .hero{border-radius:30px;padding:26px 22px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:250px;height:250px;border-radius:50%;right:-80px;top:-95px;background:radial-gradient(circle,rgba(69,229,141,.22),transparent 68%)}
+    .topline{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
+    .brand{font-size:.78rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:var(--green)}
+    .datechip{font-size:.76rem;color:var(--muted);padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04)}
+    h1{font-size:clamp(2.5rem,10vw,5.5rem);line-height:.92;letter-spacing:-.055em;margin:18px 0 12px;max-width:780px;position:relative;z-index:1}
+    .hero p{max-width:720px;color:var(--muted);line-height:1.55;margin:0;position:relative;z-index:1}
+    .overview{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:20px;position:relative;z-index:1}
+    .balance,.ringbox{border-radius:22px;padding:18px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+    .kicker{font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+    .bigmoney{font-size:clamp(2.1rem,7vw,4rem);font-weight:950;letter-spacing:-.04em;margin:6px 0}
+    .balance small{color:var(--muted)}
+    .ringbox{display:flex;align-items:center;gap:15px;justify-content:center}
+    .ring{--p:0; width:94px;height:94px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.08) 0);position:relative;flex:0 0 auto}
+    .ring:before{content:"";position:absolute;inset:9px;border-radius:50%;background:#0b1c15}
+    .ring span{position:relative;font-weight:950;font-size:1.05rem}
+    .ringtext strong{display:block;font-size:1rem}.ringtext small{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+    .card{border-radius:var(--radius);padding:20px}
+    .cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    h2{font-size:1.35rem;margin:0 0 4px;letter-spacing:-.02em}.sub{color:var(--muted);font-size:.9rem}
+    .tag{font-size:.7rem;font-weight:900;letter-spacing:.07em;padding:7px 10px;border-radius:999px;color:var(--blue);border:1px solid rgba(114,183,255,.25);background:rgba(114,183,255,.1)}
+    .job2 .tag{color:var(--green);border-color:rgba(69,229,141,.25);background:rgba(69,229,141,.1)}
+    .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:18px}
+    .field.full{grid-column:1/-1}
+    label{display:block;font-size:.76rem;color:var(--muted);margin:0 0 6px}
+    input{width:100%;border:1px solid var(--line);border-radius:14px;background:rgba(2,10,7,.62);color:var(--text);padding:13px 13px;outline:none}
+    input:focus{border-color:rgba(69,229,141,.55);box-shadow:0 0 0 3px rgba(69,229,141,.09)}
+    .recommend{margin-top:16px;border:1px solid rgba(255,201,101,.2);border-radius:20px;padding:17px;background:linear-gradient(135deg,rgba(255,201,101,.09),rgba(255,255,255,.025))}
+    .recommend .amount{font-size:2.15rem;font-weight:950;letter-spacing:-.035em;margin:4px 0}.recommend p{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0}
+    .progress{height:12px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.07);margin:16px 0 7px}.bar{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),#a4d5ff);transition:width .45s ease}.job2 .bar{background:linear-gradient(90deg,var(--green),var(--green2))}
+    .progressrow{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.78rem}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:14px}.stat{padding:13px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.stat span{display:block;color:var(--muted);font-size:.72rem;margin-bottom:4px}.stat strong{font-size:.95rem}
+    .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:14px;padding:12px 14px;font-weight:900;cursor:pointer}.primary{background:var(--green);color:#04120b}.secondary{background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--line)}.danger{background:rgba(255,124,124,.09);color:#ff9b9b;border:1px solid rgba(255,124,124,.17)}
+    .wide{margin-top:14px}.widegrid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}.wide .bigmoney{color:var(--gold)}
+    .historyhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.historylist{display:grid;gap:9px;margin-top:14px}.entry{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035)}.entrymain{display:flex;align-items:center;gap:11px}.dot{width:11px;height:11px;border-radius:50%;background:var(--blue);box-shadow:0 0 18px rgba(114,183,255,.6)}.dot.two{background:var(--green);box-shadow:0 0 18px rgba(69,229,141,.55)}.entry strong{display:block}.entry small{color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:25px 5px}
+    .install{margin-top:14px}.install ol{color:var(--muted);line-height:1.65;padding-left:20px}.install strong{color:var(--text)}
+    .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,120px);opacity:0;background:#f2fff7;color:#07130f;padding:12px 16px;border-radius:999px;font-weight:850;box-shadow:var(--shadow);transition:.3s;z-index:10}.toast.show{transform:translate(-50%,0);opacity:1}
+    footer{text-align:center;color:var(--muted);font-size:.76rem;padding:24px 5px 3px}
+    @media(max-width:800px){.overview,.grid,.widegrid{grid-template-columns:1fr}.ringbox{justify-content:flex-start}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{padding:23px 18px}.card{padding:18px}.app{padding-left:11px;padding-right:11px}}
+  </style>
+</head>
+<body>
+<main class="app">
+  <section class="hero glass">
+    <div class="topline"><div class="brand">Meta 20K</div><div class="datechip" id="dateChip">—</div></div>
+    <h1>Dos trabajos.<br>Una meta grande.</h1>
+    <p>Calcula automáticamente cuánto guardar de cada cheque para acercarte a $10,000 por trabajo antes del 31 de diciembre.</p>
+    <div class="overview">
+      <div class="balance"><div class="kicker">Ahorrado en total</div><div class="bigmoney" id="totalSaved">$0</div><small id="totalRemaining">Faltan $20,000</small></div>
+      <div class="ringbox"><div class="ring" id="ring"><span id="ringPct">0%</span></div><div class="ringtext"><strong>Progreso general</strong><small id="ringCaption">Meta combinada: $20,000</small></div></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card glass job1" data-job="1">
+      <div class="cardhead"><div><h2>Trabajo 1</h2><div class="sub">Pago semanal</div></div><span class="tag">CADA 7 DÍAS</span></div>
+      <div class="fields">
+        <div class="field"><label for="income1">Pago aproximado por cheque</label><input id="income1" type="number" inputmode="decimal" min="0" step="0.01" placeholder="$850"></div>
+        <div class="field"><label for="saved1">Ya ahorrado</label><input id="saved1" type="number" inputmode="decimal" min="0" step="0.01" placeholder="$500"></div>
+        <div class="field"><label for="goal1">Meta de este trabajo</label><input id="goal1" type="number" inputmode="decimal" min="1" step="100" value="10000"></div>
+        <div class="field"><label for="nextPay1">Próximo día de pago</label><input id="nextPay1" type="date"></div>
+        <div class="field full"><label for="deposit1">Registrar un depósito nuevo</label><input id="deposit1" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ej. 300"></div>
+      </div>
+      <div class="recommend"><div class="kicker">Ahorra por cheque</div><div class="amount" id="perCheck1">—</div><p id="message1">Agrega tu pago y tu próximo día de pago.</p></div>
+      <div class="progress"><div class="bar" id="bar1"></div></div><div class="progressrow"><span id="progress1">0% ahorrado</span><span id="remaining1">—</span></div>
+      <div class="stats"><div class="stat"><span>Cheques restantes</span><strong id="checks1">—</strong></div><div class="stat"><span>Porcentaje del cheque</span><strong id="percent1">—</strong></div><div class="stat"><span>Te quedaría por cheque</span><strong id="left1">—</strong></div><div class="stat"><span>Fecha límite</span><strong>31 de diciembre</strong></div></div>
+      <div class="actions"><button class="btn primary" onclick="addDeposit(1)">Agregar depósito</button><button class="btn danger" onclick="resetJob(1)">Reiniciar</button></div>
+    </article>
+
+    <article class="card glass job2" data-job="2">
+      <div class="cardhead"><div><h2>Trabajo 2</h2><div class="sub">Pago cada dos semanas</div></div><span class="tag">CADA 14 DÍAS</span></div>
+      <div class="fields">
+        <div class="field"><label for="income2">Pago aproximado por cheque</label><input id="income2" type="number" inputmode="decimal" min="0" step="0.01" placeholder="$1,400"></div>
+        <div class="field"><label for="saved2">Ya ahorrado</label><input id="saved2" type="number" inputmode="decimal" min="0" step="0.01" placeholder="$500"></div>
+        <div class="field"><label for="goal2">Meta de este trabajo</label><input id="goal2" type="number" inputmode="decimal" min="1" step="100" value="10000"></div>
+        <div class="field"><label for="nextPay2">Próximo día de pago</label><input id="nextPay2" type="date"></div>
+        <div class="field full"><label for="deposit2">Registrar un depósito nuevo</label><input id="deposit2" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ej. 500"></div>
+      </div>
+      <div class="recommend"><div class="kicker">Ahorra por cheque</div><div class="amount" id="perCheck2">—</div><p id="message2">Agrega tu pago y tu próximo día de pago.</p></div>
+      <div class="progress"><div class="bar" id="bar2"></div></div><div class="progressrow"><span id="progress2">0% ahorrado</span><span id="remaining2">—</span></div>
+      <div class="stats"><div class="stat"><span>Cheques restantes</span><strong id="checks2">—</strong></div><div class="stat"><span>Porcentaje del cheque</span><strong id="percent2">—</strong></div><div class="stat"><span>Te quedaría por cheque</span><strong id="left2">—</strong></div><div class="stat"><span>Fecha límite</span><strong>31 de diciembre</strong></div></div>
+      <div class="actions"><button class="btn primary" onclick="addDeposit(2)">Agregar depósito</button><button class="btn danger" onclick="resetJob(2)">Reiniciar</button></div>
+    </article>
+  </section>
+
+  <section class="card glass wide"><div class="widegrid"><div><div class="kicker">Proyección para fin de año</div><div class="bigmoney" id="projection">$0</div><div class="sub" id="projectionMessage">Completa los datos de tus dos trabajos.</div></div><div><div class="progress"><div class="bar" id="projectionBar" style="background:linear-gradient(90deg,var(--gold),#fff0b8)"></div></div><div class="progressrow"><span id="projectionPct">0%</span><span id="projectionGap">—</span></div></div></div></section>
+
+  <section class="card glass wide"><div class="historyhead"><div><h2>Historial de depósitos</h2><div class="sub">Tus datos se guardan únicamente en este dispositivo.</div></div><button class="btn secondary" onclick="exportCSV()">Exportar CSV</button></div><div class="historylist" id="history"></div></section>
+
+  <section class="card glass install"><h2>Instalar en iPhone</h2><ol><li>Abre el enlace de la app en <strong>Safari</strong>.</li><li>Toca el botón <strong>Compartir</strong>.</li><li>Selecciona <strong>Agregar a pantalla de inicio</strong>.</li></ol></section>
+  <footer>Los cálculos usan tu próximo día de pago y cuentan los cheques hasta el 31 de diciembre del año actual.</footer>
+</main>
+<div class="toast" id="toast">Guardado</div>
+<script>
+const KEY='meta20k_v3';
+const today=new Date(); today.setHours(0,0,0,0);
+const deadline=new Date(today.getFullYear(),11,31,23,59,59);
+const defaults={income1:'',income2:'',saved1:0,saved2:0,goal1:10000,goal2:10000,nextPay1:'',nextPay2:'',deposits:[]};
+let state={...defaults,...(JSON.parse(localStorage.getItem(KEY)||'{}'))};
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(Number(n)||0);
+const num=v=>Math.max(0,Number(v)||0);
+const iso=d=>d.toISOString().slice(0,10);
+function defaultNextPay(days){const d=new Date(today);d.setDate(d.getDate()+days);return iso(d)}
+if(!state.nextPay1) state.nextPay1=defaultNextPay(7);
+if(!state.nextPay2) state.nextPay2=defaultNextPay(14);
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function toast(text='Guardado'){const t=$('toast');t.textContent=text;t.classList.add('show');clearTimeout(window._toast);window._toast=setTimeout(()=>t.classList.remove('show'),1500)}
+function countChecks(nextPay,interval){let d=new Date(nextPay+'T12:00:00');if(Number.isNaN(d.getTime()))return 0;while(d<today)d.setDate(d.getDate()+interval);let count=0;while(d<=deadline){count++;d.setDate(d.getDate()+interval)}return count}
+function calc(job){const income=num(state['income'+job]),saved=num(state['saved'+job]),goal=Math.max(1,num(state['goal'+job])||10000),interval=job===1?7:14,checks=countChecks(state['nextPay'+job],interval),remaining=Math.max(0,goal-saved),perCheck=checks?remaining/checks:remaining,pct=income?perCheck/income*100:0,left=Math.max(0,income-perCheck),possible=Math.min(goal,saved+(income*checks));return{income,saved,goal,checks,remaining,perCheck,pct,left,possible}}
+function renderJob(job){const c=calc(job);const pctSaved=Math.min(100,c.saved/c.goal*100);$('perCheck'+job).textContent=c.checks?money(c.perCheck):'—';$('bar'+job).style.width=pctSaved+'%';$('progress'+job).textContent=pctSaved.toFixed(1)+'% ahorrado';$('remaining'+job).textContent=c.remaining?('Faltan '+money(c.remaining)):'Meta alcanzada';$('checks'+job).textContent=c.checks+' cheque'+(c.checks===1?'':'s');$('percent'+job).textContent=c.income?c.pct.toFixed(1)+'%':'—';$('left'+job).textContent=c.income?money(c.left):'—';let msg='Agrega tu pago y tu próximo día de pago.';if(c.remaining===0)msg='Ya alcanzaste la meta de este trabajo.';else if(!c.checks)msg='El próximo pago está después de la fecha límite.';else if(c.income&&c.pct>100)msg='La meta requiere más del 100% de cada cheque. Con este ingreso llegarías aproximadamente a '+money(c.possible)+'.';else if(c.income)msg='Guarda '+money(c.perCheck)+' de cada cheque ('+c.pct.toFixed(1)+'%). Te quedarían '+money(c.left)+' por pago.';$('message'+job).textContent=msg}
+function render(){renderJob(1);renderJob(2);const a=calc(1),b=calc(2),goal=a.goal+b.goal,saved=a.saved+b.saved,remaining=Math.max(0,goal-saved),savedPct=Math.min(100,saved/goal*100),possible=a.possible+b.possible,possiblePct=Math.min(100,possible/goal*100);$('totalSaved').textContent=money(saved);$('totalRemaining').textContent=remaining?('Faltan '+money(remaining)):'Meta completa';$('ring').style.setProperty('--p',savedPct);$('ringPct').textContent=savedPct.toFixed(0)+'%';$('ringCaption').textContent='Meta combinada: '+money(goal);$('projection').textContent=money(possible);$('projectionBar').style.width=possiblePct+'%';$('projectionPct').textContent=possiblePct.toFixed(1)+'% proyectado';$('projectionGap').textContent=possible>=goal?'Meta alcanzable':'Faltarían '+money(goal-possible);$('projectionMessage').textContent=possible>=goal?'Con tus ingresos actuales puedes alcanzar ambas metas guardando las cantidades indicadas.':'Con los cheques restantes, tu máximo estimado sería '+money(possible)+'.';renderHistory();save()}
+function bind(){[1,2].forEach(j=>['income','saved','goal','nextPay'].forEach(key=>{const el=$(key+j);el.value=state[key+j];el.addEventListener('input',e=>{state[key+j]=key==='nextPay'?e.target.value:num(e.target.value);render()})}))}
+function addDeposit(job){const el=$('deposit'+job),amount=num(el.value);if(!amount){toast('Escribe una cantidad');return}state['saved'+job]=num(state['saved'+job])+amount;state.deposits.unshift({id:Date.now(),job,amount,date:new Date().toISOString()});$('saved'+job).value=state['saved'+job];el.value='';render();toast('Depósito agregado')}
+function removeDeposit(id){const d=state.deposits.find(x=>x.id===id);if(!d)return;state['saved'+d.job]=Math.max(0,num(state['saved'+d.job])-num(d.amount));state.deposits=state.deposits.filter(x=>x.id!==id);$('saved'+d.job).value=state['saved'+d.job];render();toast('Depósito eliminado')}
+function resetJob(job){if(!confirm('¿Reiniciar este trabajo?'))return;state['income'+job]='';state['saved'+job]=0;state['goal'+job]=10000;state['nextPay'+job]=defaultNextPay(job===1?7:14);state.deposits=state.deposits.filter(d=>d.job!==job);['income','saved','goal','nextPay'].forEach(k=>$(k+job).value=state[k+job]);render();toast('Trabajo reiniciado')}
+function renderHistory(){const box=$('history');if(!state.deposits.length){box.innerHTML='<div class="empty">Todavía no has registrado depósitos.</div>';return}box.innerHTML=state.deposits.map(d=>`<div class="entry"><div class="entrymain"><span class="dot ${d.job===2?'two':''}"></span><div><strong>${money(d.amount)}</strong><small>Trabajo ${d.job} · ${new Date(d.date).toLocaleDateString('es-US',{month:'short',day:'numeric',year:'numeric'})}</small></div></div><button class="btn danger" onclick="removeDeposit(${d.id})">Eliminar</button></div>`).join('')}
+function exportCSV(){if(!state.deposits.length){toast('No hay depósitos');return}const rows=[['Fecha','Trabajo','Frecuencia','Cantidad'],...state.deposits.slice().reverse().map(d=>[new Date(d.date).toLocaleDateString('en-US'),'Trabajo '+d.job,d.job===1?'Semanal':'Cada 2 semanas',Number(d.amount).toFixed(2)])];const csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='meta-20k-depositos.csv';a.click();URL.revokeObjectURL(url)}
+$('dateChip').textContent=today.toLocaleDateString('es-US',{month:'short',day:'numeric',year:'numeric'});bind();render();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));
+</script>
+</body>
+</html>
