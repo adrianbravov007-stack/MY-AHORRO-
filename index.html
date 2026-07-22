@@ -11,76 +11,478 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Mi Ahorro</title>
 <style>
-:root{color-scheme:dark;--bg:#06100c;--card:rgba(16,35,27,.9);--text:#f4fff8;--muted:#a0b6aa;--line:rgba(255,255,255,.1);--green:#45e58d;--gold:#ffc965;--blue:#72b7ff;--red:#ff8585}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 5% 0,rgba(69,229,141,.2),transparent 32%),linear-gradient(180deg,var(--bg),#020705);min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}button,input,select{font:inherit}.app{max-width:1050px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 12px 30px}.glass{background:linear-gradient(145deg,rgba(20,43,33,.94),rgba(8,20,15,.92));border:1px solid var(--line);box-shadow:0 22px 70px rgba(0,0,0,.36);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}.hero,.card{border-radius:27px;padding:20px}.brand{font-size:.76rem;font-weight:900;letter-spacing:.14em;color:var(--green);text-transform:uppercase}.hero h1{font-size:clamp(2.6rem,11vw,5rem);line-height:.94;letter-spacing:-.055em;margin:14px 0 10px}.hero p,.sub{color:var(--muted);line-height:1.5}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.metric{border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.035)}.metric span{display:block;color:var(--muted);font-size:.72rem;margin-bottom:5px}.metric strong{font-size:1.15rem}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.field label{display:block;font-size:.76rem;color:var(--muted);margin-bottom:6px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:14px;background:rgba(1,9,6,.65);color:var(--text);padding:13px;outline:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.cardhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.card h2{margin:0 0 4px;font-size:1.35rem}.tag{font-size:.68rem;font-weight:900;padding:7px 9px;border-radius:999px;color:var(--blue);border:1px solid rgba(114,183,255,.25);background:rgba(114,183,255,.1)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.full{grid-column:1/-1}.mode{display:flex;gap:7px;padding:5px;border:1px solid var(--line);background:rgba(0,0,0,.2);border-radius:15px}.mode button{flex:1;border:0;border-radius:11px;padding:10px 8px;background:transparent;color:var(--muted);font-weight:800}.mode button.active{background:var(--green);color:#04120b}.recommend{margin-top:15px;border:1px solid rgba(255,201,101,.22);border-radius:19px;padding:16px;background:rgba(255,201,101,.07)}.recommend span{font-size:.73rem;color:var(--muted);text-transform:uppercase;font-weight:850;letter-spacing:.08em}.amount{font-size:2.05rem;font-weight:950;letter-spacing:-.04em;margin:4px 0}.recommend p{margin:0;color:var(--muted);line-height:1.45;font-size:.87rem}.progress{height:11px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.07);margin:15px 0 7px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--green),#adffd3);transition:.35s}.progressrow{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.78rem}.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.stat{padding:12px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035)}.stat span{display:block;font-size:.7rem;color:var(--muted);margin-bottom:4px}.stat strong{color:var(--text)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:13px;padding:11px 13px;font-weight:900}.primary{background:var(--green);color:#04120b}.secondary{background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--line)}.danger{background:rgba(255,133,133,.09);color:#ffabab;border:1px solid rgba(255,133,133,.18)}.hidden{display:none!important}.history{margin-top:14px}.entry{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:15px;margin-top:8px;background:rgba(255,255,255,.03)}.entry small{color:var(--muted);display:block}.empty{text-align:center;color:var(--muted);padding:20px}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,100px);opacity:0;background:white;color:#07130f;padding:11px 15px;border-radius:999px;font-weight:850;transition:.3s}.toast.show{transform:translate(-50%,0);opacity:1}footer{text-align:center;color:var(--muted);font-size:.75rem;padding:22px 4px}
-@media(max-width:760px){.summary,.toolbar,.grid,.fields{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr}.summary .metric:last-child{grid-column:1/-1}.full{grid-column:auto}.hero,.card{padding:18px}}
+:root {
+  color-scheme: dark;
+  --bg: #06100c;
+  --card: rgba(16, 35, 27, .9);
+  --text: #f4fff8;
+  --muted: #a0b6aa;
+  --line: rgba(255, 255, 255, .1);
+  --green: #45e58d;
+  --gold: #ffc965;
+  --blue: #72b7ff;
+  --red: #ff8585;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 5% 0, rgba(69, 229, 141, .2), transparent 32%), linear-gradient(180deg, var(--bg), #020705);
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+button, input, select { font: inherit; }
+.app { max-width: 1050px; margin: auto; padding: calc(18px + env(safe-area-inset-top)) 12px 30px; }
+.glass {
+  background: linear-gradient(145deg, rgba(20, 43, 33, .94), rgba(8, 20, 15, .92));
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, .36);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.hero, .card { border-radius: 27px; padding: 20px; }
+.brand { font-size: .76rem; font-weight: 900; letter-spacing: .14em; color: var(--green); text-transform: uppercase; }
+.hero h1 { font-size: clamp(2.6rem, 11vw, 5rem); line-height: .94; letter-spacing: -.055em; margin: 14px 0 10px; }
+.hero p, .sub { color: var(--muted); line-height: 1.5; }
+.summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+.metric { border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: rgba(255, 255, 255, .035); }
+.metric span { display: block; color: var(--muted); font-size: .72rem; margin-bottom: 5px; }
+.metric strong { font-size: 1.15rem; }
+.toolbar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.field label { display: block; font-size: .76rem; color: var(--muted); margin-bottom: 6px; }
+.field input, .field select {
+  width: 100%; border: 1px solid var(--line); border-radius: 14px;
+  background: rgba(1, 9, 6, .65); color: var(--text); padding: 13px; outline: none;
+  transition: border-color .2s;
+}
+.field input:focus, .field select:focus { border-color: var(--green); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.cardhead { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.card h2 { margin: 0 0 4px; font-size: 1.35rem; }
+.tag { font-size: .68rem; font-weight: 900; padding: 7px 9px; border-radius: 999px; color: var(--blue); border: 1px solid rgba(114, 183, 255, .25); background: rgba(114, 183, 255, .1); }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.full { grid-column: 1 / -1; }
+.mode { display: flex; gap: 7px; padding: 5px; border: 1px solid var(--line); background: rgba(0, 0, 0, .2); border-radius: 15px; }
+.mode button { flex: 1; border: 0; border-radius: 11px; padding: 10px 8px; background: transparent; color: var(--muted); font-weight: 800; cursor: pointer; transition: background .2s, color .2s; }
+.mode button.active { background: var(--green); color: #04120b; }
+.recommend { margin-top: 15px; border: 1px solid rgba(255, 201, 101, .22); border-radius: 19px; padding: 16px; background: rgba(255, 201, 101, .07); }
+.recommend span { font-size: .73rem; color: var(--muted); text-transform: uppercase; font-weight: 850; letter-spacing: .08em; }
+.amount { font-size: 2.05rem; font-weight: 950; letter-spacing: -.04em; margin: 4px 0; }
+.recommend p { margin: 0; color: var(--muted); line-height: 1.45; font-size: .87rem; }
+.progress { height: 11px; border-radius: 999px; overflow: hidden; background: rgba(255, 255, 255, .07); margin: 15px 0 7px; }
+.bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #adffd3); transition: width .35s ease; }
+.progressrow { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: .78rem; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+.stat { padding: 12px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255, 255, 255, .035); }
+.stat span { display: block; font-size: .7rem; color: var(--muted); margin-bottom: 4px; }
+.stat strong { color: var(--text); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.btn { border: 0; border-radius: 13px; padding: 11px 13px; font-weight: 900; cursor: pointer; transition: opacity .2s; }
+.btn:hover { opacity: .9; }
+.primary { background: var(--green); color: #04120b; }
+.secondary { background: rgba(255, 255, 255, .07); color: var(--text); border: 1px solid var(--line); }
+.danger { background: rgba(255, 133, 133, .09); color: #ffabab; border: 1px solid rgba(255, 133, 133, .18); }
+.hidden { display: none !important; }
+.history { margin-top: 14px; }
+.entry { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 15px; margin-top: 8px; background: rgba(255, 255, 255, .03); }
+.entry small { color: var(--muted); display: block; }
+.empty { text-align: center; color: var(--muted); padding: 20px; }
+.toast { position: fixed; left: 50%; bottom: 25px; transform: translate(-50%, 100px); opacity: 0; background: white; color: #07130f; padding: 11px 15px; border-radius: 999px; font-weight: 850; transition: .3s; z-index: 1000; }
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
+footer { text-align: center; color: var(--muted); font-size: .75rem; padding: 22px 4px; }
+
+@media(max-width:760px) {
+  .summary, .toolbar, .grid, .fields { grid-template-columns: 1fr; }
+  .summary { grid-template-columns: 1fr 1fr; }
+  .summary .metric:last-child { grid-column: 1 / -1; }
+  .full { grid-column: auto; }
+  .hero, .card { padding: 18px; }
+}
 </style>
 </head>
 <body>
 <main class="app">
-<section class="hero glass">
-<div class="brand">Mi Ahorro</div>
-<h1>Tu dinero.<br>Tu propia meta.</h1>
-<p>Configura uno o dos ingresos, elige ahorro automático o manual y calcula cuánto transferir cada vez que recibas tu pago.</p>
-<div class="summary">
-<div class="metric"><span>AHORRADO</span><strong id="totalSaved">$0</strong></div>
-<div class="metric"><span>META TOTAL</span><strong id="totalGoal">$0</strong></div>
-<div class="metric"><span>FALTA</span><strong id="totalLeft">$0</strong></div>
-</div>
-<div class="toolbar">
-<div class="field"><label>Número de ingresos</label><select id="incomeCount"><option value="1">Un trabajo o ingreso</option><option value="2">Dos trabajos o ingresos</option></select></div>
-<div class="field"><label>Fecha límite general</label><input id="deadline" type="date"></div>
-</div>
-</section>
-<section class="grid" id="cards"></section>
-<section class="card glass history">
-<div class="cardhead"><div><h2>Historial de depósitos</h2><div class="sub">Se guarda únicamente en este dispositivo.</div></div><button class="btn secondary" onclick="exportCSV()">Exportar CSV</button></div>
-<div id="history"></div>
-</section>
-<footer>La recomendación automática se ajusta según tu meta, fecha límite, frecuencia de pago y cantidad ya ahorrada.</footer>
+  <section class="hero glass">
+    <div class="brand">Mi Ahorro</div>
+    <h1>Tu dinero.<br>Tu propia meta.</h1>
+    <p>Configura uno o dos ingresos, elige ahorro automático o manual y calcula cuánto transferir cada vez que recibas tu pago.</p>
+    
+    <div class="summary">
+      <div class="metric"><span>AHORRADO</span><strong id="totalSaved">$0</strong></div>
+      <div class="metric"><span>META TOTAL</span><strong id="totalGoal">$0</strong></div>
+      <div class="metric"><span>FALTA</span><strong id="totalLeft">$0</strong></div>
+    </div>
+    
+    <div class="toolbar">
+      <div class="field">
+        <label for="incomeCount">Número de ingresos</label>
+        <select id="incomeCount">
+          <option value="1">Un trabajo o ingreso</option>
+          <option value="2">Dos trabajos o ingresos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="deadline">Fecha límite general</label>
+        <input id="deadline" type="date">
+      </div>
+    </div>
+  </section>
+
+  <section class="grid" id="cards"></section>
+
+  <section class="card glass history">
+    <div class="cardhead">
+      <div>
+        <h2>Historial de depósitos</h2>
+        <div class="sub">Se guarda únicamente en este dispositivo.</div>
+      </div>
+      <button class="btn secondary" onclick="exportCSV()">Exportar CSV</button>
+    </div>
+    <div id="history"></div>
+  </section>
+
+  <footer>La recomendación automática se ajusta según tu meta, fecha límite, frecuencia de pago y cantidad ya ahorrada.</footer>
 </main>
+
 <div class="toast" id="toast">Guardado</div>
+
 <script>
-const KEY='mi_ahorro_v4';
-const old=JSON.parse(localStorage.getItem('meta20k_v3')||'{}');
-const yearEnd=()=>new Date(new Date().getFullYear(),11,31).toISOString().slice(0,10);
-const makeIncome=i=>({name:'Trabajo '+i,pay:old['income'+i]||'',saved:old['saved'+i]||0,goal:old['goal'+i]||10000,frequency:i===1?'7':'14',nextPay:old['nextPay'+i]||'',directDeposit:false,mode:'auto',manualAmount:''});
-const defaults={incomeCount:2,deadline:yearEnd(),incomes:[makeIncome(1),makeIncome(2)],deposits:old.deposits||[]};
-let state={...defaults,...JSON.parse(localStorage.getItem(KEY)||'{}')};
-if(!Array.isArray(state.incomes))state.incomes=defaults.incomes;
-while(state.incomes.length<2)state.incomes.push(makeIncome(state.incomes.length+1));
-const $=id=>document.getElementById(id),num=v=>Math.max(0,Number(v)||0),money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(num(n));
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
-function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>e.classList.remove('show'),1400)}
-function checksLeft(x){if(!x.nextPay||!state.deadline)return 0;let d=new Date(x.nextPay+'T12:00:00'),end=new Date(state.deadline+'T23:59:59'),today=new Date();today.setHours(0,0,0,0);if(isNaN(d)||isNaN(end))return 0;let days=Number(x.frequency);while(d<today)d.setDate(d.getDate()+days);let n=0;while(d<=end){n++;d.setDate(d.getDate()+days)}return n}
-function calc(x){const checks=checksLeft(x),remaining=Math.max(0,num(x.goal)-num(x.saved)),auto=checks?remaining/checks:remaining,chosen=x.mode==='manual'?num(x.manualAmount):auto,pct=num(x.pay)?chosen/num(x.pay)*100:0,left=Math.max(0,num(x.pay)-chosen),projected=num(x.saved)+chosen*checks;return{checks,remaining,chosen,pct,left,projected}}
-const freq=v=>({'7':'Semanal','14':'Cada 2 semanas','15':'Dos veces al mes','30':'Mensual'})[v]||'Pago';
-function esc(s=''){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-function message(x,c){if(c.remaining===0)return'Meta alcanzada. Excelente trabajo.';if(!x.nextPay)return'Agrega tu próximo día de pago.';if(!c.checks)return'No hay pagos antes de la fecha límite.';if(x.mode==='manual'){const d=c.projected-num(x.goal);return d>=0?`Con ${money(c.chosen)} por pago superarías la meta por ${money(d)}.`:`Con ${money(c.chosen)} por pago llegarías a ${money(c.projected)} y faltarían ${money(-d)}.`}if(num(x.pay)&&c.pct>100)return'La meta requiere más del 100% de cada pago. Amplía la fecha o reduce la meta.';return`${x.directDeposit?'Programa una transferencia automática de':'Guarda'} ${money(c.chosen)} cada vez que recibas tu pago.`}
-function card(i){const x=state.incomes[i],c=calc(x),p=Math.min(100,num(x.saved)/Math.max(1,num(x.goal))*100);return`<article class="card glass"><div class="cardhead"><div><h2>${esc(x.name||'Ingreso '+(i+1))}</h2><div class="sub">${freq(x.frequency)}${x.directDeposit?' · Depósito directo':''}</div></div><span class="tag">INGRESO ${i+1}</span></div><div class="fields">
-<div class="field full"><label>Nombre del trabajo o ingreso</label><input data-i="${i}" data-k="name" value="${esc(x.name)}"></div>
-<div class="field"><label>Pago aproximado</label><input data-i="${i}" data-k="pay" type="number" inputmode="decimal" value="${x.pay}"></div>
-<div class="field"><label>Ya ahorrado</label><input data-i="${i}" data-k="saved" type="number" inputmode="decimal" value="${x.saved}"></div>
-<div class="field"><label>Meta de ahorro</label><input data-i="${i}" data-k="goal" type="number" inputmode="decimal" value="${x.goal}"></div>
-<div class="field"><label>Frecuencia de pago</label><select data-i="${i}" data-k="frequency"><option value="7" ${x.frequency==='7'?'selected':''}>Semanal</option><option value="14" ${x.frequency==='14'?'selected':''}>Cada 2 semanas</option><option value="15" ${x.frequency==='15'?'selected':''}>Dos veces al mes</option><option value="30" ${x.frequency==='30'?'selected':''}>Mensual</option></select></div>
-<div class="field"><label>Próximo pago</label><input data-i="${i}" data-k="nextPay" type="date" value="${x.nextPay}"></div>
-<div class="field"><label>Forma de pago</label><select data-i="${i}" data-k="directDeposit"><option value="false" ${!x.directDeposit?'selected':''}>Cheque u otro</option><option value="true" ${x.directDeposit?'selected':''}>Depósito directo</option></select></div>
-<div class="field full"><label>Cómo definir el ahorro</label><div class="mode"><button class="${x.mode==='auto'?'active':''}" onclick="setMode(${i},'auto')">Automático</button><button class="${x.mode==='manual'?'active':''}" onclick="setMode(${i},'manual')">Manual</button></div></div>
-<div class="field full ${x.mode==='manual'?'':'hidden'}"><label>Cantidad manual por pago</label><input data-i="${i}" data-k="manualAmount" type="number" inputmode="decimal" value="${x.manualAmount}" placeholder="Ej. 250"></div>
-<div class="field full"><label>Registrar depósito nuevo</label><input id="deposit${i}" type="number" inputmode="decimal" placeholder="Ej. 300"></div></div>
-<div class="recommend"><span>${x.mode==='auto'?'Cantidad recomendada':'Cantidad elegida por ti'}</span><div class="amount">${money(c.chosen)}</div><p>${message(x,c)}</p></div>
-<div class="progress"><div class="bar" style="width:${p}%"></div></div><div class="progressrow"><span>${p.toFixed(1)}% ahorrado</span><span>Faltan ${money(c.remaining)}</span></div>
-<div class="stats"><div class="stat"><span>Pagos restantes</span><strong>${c.checks}</strong></div><div class="stat"><span>Porcentaje del pago</span><strong>${num(x.pay)?c.pct.toFixed(1)+'%':'—'}</strong></div><div class="stat"><span>Disponible después de ahorrar</span><strong>${num(x.pay)?money(c.left):'—'}</strong></div><div class="stat"><span>Proyección final</span><strong>${money(c.projected)}</strong></div></div>
-<div class="actions"><button class="btn primary" onclick="addDeposit(${i})">Agregar depósito</button><button class="btn danger" onclick="resetIncome(${i})">Reiniciar</button></div></article>`}
-function render(){state.incomeCount=Number(state.incomeCount)||1;$('incomeCount').value=state.incomeCount;$('deadline').value=state.deadline;$('cards').innerHTML=state.incomes.slice(0,state.incomeCount).map((_,i)=>card(i)).join('');bind();const a=state.incomes.slice(0,state.incomeCount),saved=a.reduce((s,x)=>s+num(x.saved),0),goal=a.reduce((s,x)=>s+num(x.goal),0);$('totalSaved').textContent=money(saved);$('totalGoal').textContent=money(goal);$('totalLeft').textContent=money(Math.max(0,goal-saved));history();save()}
-function bind(){document.querySelectorAll('[data-i]').forEach(e=>e.addEventListener('input',ev=>{const i=+ev.target.dataset.i,k=ev.target.dataset.k,v=ev.target.value;state.incomes[i][k]=k==='directDeposit'?v==='true':(['pay','saved','goal','manualAmount'].includes(k)?num(v):v);render()}))}
-function setMode(i,m){state.incomes[i].mode=m;render()}
-function addDeposit(i){const e=$('deposit'+i),a=num(e.value);if(!a)return toast('Escribe una cantidad');state.incomes[i].saved=num(state.incomes[i].saved)+a;state.deposits.unshift({id:Date.now(),income:i,amount:a,date:new Date().toISOString(),name:state.incomes[i].name});render();toast('Depósito agregado')}
-function removeDeposit(id){const d=state.deposits.find(x=>x.id===id);if(!d)return;state.incomes[d.income].saved=Math.max(0,num(state.incomes[d.income].saved)-num(d.amount));state.deposits=state.deposits.filter(x=>x.id!==id);render()}
-function resetIncome(i){if(!confirm('¿Reiniciar este ingreso?'))return;state.incomes[i]=makeIncome(i+1);state.deposits=state.deposits.filter(x=>x.income!==i);render()}
-function history(){const b=$('history');if(!state.deposits.length){b.innerHTML='<div class="empty">Todavía no hay depósitos registrados.</div>';return}b.innerHTML=state.deposits.map(d=>`<div class="entry"><div><strong>${money(d.amount)}</strong><small>${esc(d.name||'Ingreso '+(d.income+1))} · ${new Date(d.date).toLocaleDateString('es-US')}</small></div><button class="btn danger" onclick="removeDeposit(${d.id})">Eliminar</button></div>`).join('')}
-function exportCSV(){if(!state.deposits.length)return toast('No hay depósitos');const rows=[['Fecha','Ingreso','Cantidad'],...state.deposits.slice().reverse().map(d=>[new Date(d.date).toLocaleDateString('en-US'),d.name||'Ingreso '+(d.income+1),Number(d.amount).toFixed(2)])],csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'),blob=new Blob([csv],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mi-ahorro.csv';a.click()}
-$('incomeCount').addEventListener('change',e=>{state.incomeCount=+e.target.value;render()});$('deadline').addEventListener('input',e=>{state.deadline=e.target.value;render()});render();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));
+const KEY = 'mi_ahorro_v4';
+const old = JSON.parse(localStorage.getItem('meta20k_v3') || '{}');
+const yearEnd = () => new Date(new Date().getFullYear(), 11, 31).toISOString().slice(0, 10);
+
+const makeIncome = i => ({
+  name: 'Trabajo ' + i,
+  pay: old['income' + i] || '',
+  saved: old['saved' + i] || 0,
+  goal: old['goal' + i] || 10000,
+  frequency: i === 1 ? '7' : '14',
+  nextPay: old['nextPay' + i] || '',
+  directDeposit: false,
+  mode: 'auto',
+  manualAmount: ''
+});
+
+const defaults = {
+  incomeCount: 2,
+  deadline: yearEnd(),
+  incomes: [makeIncome(1), makeIncome(2)],
+  deposits: old.deposits || []
+};
+
+let state = { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') };
+if (!Array.isArray(state.incomes)) state.incomes = defaults.incomes;
+while (state.incomes.length < 2) state.incomes.push(makeIncome(state.incomes.length + 1));
+
+const $ = id => document.getElementById(id);
+const num = v => Math.max(0, Number(v) || 0);
+const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num(n));
+
+function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+
+function toast(t) {
+  const e = $('toast');
+  e.textContent = t;
+  e.classList.add('show');
+  clearTimeout(window.tt);
+  window.tt = setTimeout(() => e.classList.remove('show'), 1400);
+}
+
+function parseDateLocal(str) {
+  if (!str) return null;
+  const [y, m, d] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function checksLeft(x) {
+  if (!x.nextPay || !state.deadline) return 0;
+  let d = parseDateLocal(x.nextPay);
+  let end = parseDateLocal(state.deadline);
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (!d || !end || isNaN(d) || isNaN(end)) return 0;
+
+  let days = Number(x.frequency);
+  while (d < today) d.setDate(d.getDate() + days);
+
+  let n = 0;
+  while (d <= end) {
+    n++;
+    d.setDate(d.getDate() + days);
+  }
+  return n;
+}
+
+function calc(x) {
+  const checks = checksLeft(x);
+  const remaining = Math.max(0, num(x.goal) - num(x.saved));
+  const auto = checks ? remaining / checks : remaining;
+  const chosen = x.mode === 'manual' ? num(x.manualAmount) : auto;
+  const pct = num(x.pay) ? (chosen / num(x.pay)) * 100 : 0;
+  const left = Math.max(0, num(x.pay) - chosen);
+  const projected = num(x.saved) + chosen * checks;
+  return { checks, remaining, chosen, pct, left, projected };
+}
+
+const freq = v => ({ '7': 'Semanal', '14': 'Cada 2 semanas', '15': 'Dos veces al mes', '30': 'Mensual' })[v] || 'Pago';
+function esc(s = '') { return String(s).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m])); }
+
+function message(x, c) {
+  if (c.remaining === 0) return 'Meta alcanzada. Excelente trabajo.';
+  if (!x.nextPay) return 'Agrega tu próximo día de pago.';
+  if (!c.checks) return 'No hay pagos antes de la fecha límite.';
+  if (x.mode === 'manual') {
+    const d = c.projected - num(x.goal);
+    return d >= 0 ? `Con ${money(c.chosen)} por pago superarías la meta por ${money(d)}.` : `Con ${money(c.chosen)} por pago llegarías a ${money(c.projected)} y faltarían ${money(-d)}.`;
+  }
+  if (num(x.pay) && c.pct > 100) return 'La meta requiere más del 100% de cada pago. Amplía la fecha o reduce la meta.';
+  return `${x.directDeposit ? 'Programa una transferencia automática de' : 'Guarda'} ${money(c.chosen)} cada vez que recibas tu pago.`;
+}
+
+function updateCardCalculations(i) {
+  const cardEl = document.getElementById(`card-${i}`);
+  if (!cardEl) return;
+  const x = state.incomes[i];
+  const c = calc(x);
+  const p = Math.min(100, (num(x.saved) / Math.max(1, num(x.goal))) * 100);
+
+  cardEl.querySelector('.rec-title').textContent = x.mode === 'auto' ? 'Cantidad recomendada' : 'Cantidad elegida por ti';
+  cardEl.querySelector('.amount').textContent = money(c.chosen);
+  cardEl.querySelector('.rec-msg').textContent = message(x, c);
+  cardEl.querySelector('.bar').style.width = `${p}%`;
+  cardEl.querySelector('.pct-saved').textContent = `${p.toFixed(1)}% ahorrado`;
+  cardEl.querySelector('.rem-saved').textContent = `Faltan ${money(c.remaining)}`;
+  cardEl.querySelector('.stat-checks').textContent = c.checks;
+  cardEl.querySelector('.stat-pct').textContent = num(x.pay) ? c.pct.toFixed(1) + '%' : '—';
+  cardEl.querySelector('.stat-left').textContent = num(x.pay) ? money(c.left) : '—';
+  cardEl.querySelector('.stat-proj').textContent = money(c.projected);
+
+  const manualContainer = cardEl.querySelector('.manual-field');
+  if (x.mode === 'manual') manualContainer.classList.remove('hidden');
+  else manualContainer.classList.add('hidden');
+
+  updateHeaderSummary();
+}
+
+function updateHeaderSummary() {
+  const a = state.incomes.slice(0, state.incomeCount);
+  const saved = a.reduce((s, x) => s + num(x.saved), 0);
+  const goal = a.reduce((s, x) => s + num(x.goal), 0);
+  $('totalSaved').textContent = money(saved);
+  $('totalGoal').textContent = money(goal);
+  $('totalLeft').textContent = money(Math.max(0, goal - saved));
+}
+
+function card(i) {
+  const x = state.incomes[i];
+  const c = calc(x);
+  const p = Math.min(100, (num(x.saved) / Math.max(1, num(x.goal))) * 100);
+
+  return `<article class="card glass" id="card-${i}">
+    <div class="cardhead">
+      <div>
+        <h2>${esc(x.name || 'Ingreso ' + (i + 1))}</h2>
+        <div class="sub">${freq(x.frequency)}${x.directDeposit ? ' · Depósito directo' : ''}</div>
+      </div>
+      <span class="tag">INGRESO ${i + 1}</span>
+    </div>
+    <div class="fields">
+      <div class="field full">
+        <label for="name-${i}">Nombre del trabajo o ingreso</label>
+        <input id="name-${i}" data-i="${i}" data-k="name" value="${esc(x.name)}">
+      </div>
+      <div class="field">
+        <label for="pay-${i}">Pago aproximado</label>
+        <input id="pay-${i}" data-i="${i}" data-k="pay" type="number" inputmode="decimal" value="${x.pay}">
+      </div>
+      <div class="field">
+        <label for="saved-${i}">Ya ahorrado</label>
+        <input id="saved-${i}" data-i="${i}" data-k="saved" type="number" inputmode="decimal" value="${x.saved}">
+      </div>
+      <div class="field">
+        <label for="goal-${i}">Meta de ahorro</label>
+        <input id="goal-${i}" data-i="${i}" data-k="goal" type="number" inputmode="decimal" value="${x.goal}">
+      </div>
+      <div class="field">
+        <label for="freq-${i}">Frecuencia de pago</label>
+        <select id="freq-${i}" data-i="${i}" data-k="frequency">
+          <option value="7" ${x.frequency === '7' ? 'selected' : ''}>Semanal</option>
+          <option value="14" ${x.frequency === '14' ? 'selected' : ''}>Cada 2 semanas</option>
+          <option value="15" ${x.frequency === '15' ? 'selected' : ''}>Dos veces al mes</option>
+          <option value="30" ${x.frequency === '30' ? 'selected' : ''}>Mensual</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="nextPay-${i}">Próximo pago</label>
+        <input id="nextPay-${i}" data-i="${i}" data-k="nextPay" type="date" value="${x.nextPay}">
+      </div>
+      <div class="field">
+        <label for="dd-${i}">Forma de pago</label>
+        <select id="dd-${i}" data-i="${i}" data-k="directDeposit">
+          <option value="false" ${!x.directDeposit ? 'selected' : ''}>Cheque u otro</option>
+          <option value="true" ${x.directDeposit ? 'selected' : ''}>Depósito directo</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Cómo definir el ahorro</label>
+        <div class="mode">
+          <button type="button" class="btn-mode-auto ${x.mode === 'auto' ? 'active' : ''}" onclick="setMode(${i},'auto')">Automático</button>
+          <button type="button" class="btn-mode-manual ${x.mode === 'manual' ? 'active' : ''}" onclick="setMode(${i},'manual')">Manual</button>
+        </div>
+      </div>
+      <div class="field full manual-field ${x.mode === 'manual' ? '' : 'hidden'}">
+        <label for="manualAmount-${i}">Cantidad manual por pago</label>
+        <input id="manualAmount-${i}" data-i="${i}" data-k="manualAmount" type="number" inputmode="decimal" value="${x.manualAmount}" placeholder="Ej. 250">
+      </div>
+      <div class="field full">
+        <label for="deposit${i}">Registrar depósito nuevo</label>
+        <input id="deposit${i}" type="number" inputmode="decimal" placeholder="Ej. 300">
+      </div>
+    </div>
+    <div class="recommend">
+      <span class="rec-title">${x.mode === 'auto' ? 'Cantidad recomendada' : 'Cantidad elegida por ti'}</span>
+      <div class="amount">${money(c.chosen)}</div>
+      <p class="rec-msg">${message(x, c)}</p>
+    </div>
+    <div class="progress"><div class="bar" style="width:${p}%"></div></div>
+    <div class="progressrow"><span class="pct-saved">${p.toFixed(1)}% ahorrado</span><span class="rem-saved">Faltan ${money(c.remaining)}</span></div>
+    <div class="stats">
+      <div class="stat"><span>Pagos restantes</span><strong class="stat-checks">${c.checks}</strong></div>
+      <div class="stat"><span>Porcentaje del pago</span><strong class="stat-pct">${num(x.pay) ? c.pct.toFixed(1) + '%' : '—'}</strong></div>
+      <div class="stat"><span>Disponible después de ahorrar</span><strong class="stat-left">${num(x.pay) ? money(c.left) : '—'}</strong></div>
+      <div class="stat"><span>Proyección final</span><strong class="stat-proj">${money(c.projected)}</strong></div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn primary" onclick="addDeposit(${i})">Agregar depósito</button>
+      <button type="button" class="btn danger" onclick="resetIncome(${i})">Reiniciar</button>
+    </div>
+  </article>`;
+}
+
+function renderCards() {
+  state.incomeCount = Number(state.incomeCount) || 1;
+  $('incomeCount').value = state.incomeCount;
+  $('deadline').value = state.deadline;
+  $('cards').innerHTML = state.incomes.slice(0, state.incomeCount).map((_, i) => card(i)).join('');
+  bind();
+  updateHeaderSummary();
+  history();
+  save();
+}
+
+function bind() {
+  document.querySelectorAll('[data-i]').forEach(e => {
+    e.removeEventListener('input', handleInputChange);
+    e.addEventListener('input', handleInputChange);
+  });
+}
+
+function handleInputChange(ev) {
+  const i = +ev.target.dataset.i;
+  const k = ev.target.dataset.k;
+  const v = ev.target.value;
+  state.incomes[i][k] = k === 'directDeposit' ? v === 'true' : (['pay', 'saved', 'goal', 'manualAmount'].includes(k) ? num(v) : v);
+  updateCardCalculations(i);
+  save();
+}
+
+function setMode(i, m) {
+  state.incomes[i].mode = m;
+  const cardEl = document.getElementById(`card-${i}`);
+  if (cardEl) {
+    cardEl.querySelector('.btn-mode-auto').classList.toggle('active', m === 'auto');
+    cardEl.querySelector('.btn-mode-manual').classList.toggle('active', m === 'manual');
+  }
+  updateCardCalculations(i);
+  save();
+}
+
+function addDeposit(i) {
+  const e = $('deposit' + i);
+  const a = num(e.value);
+  if (!a) return toast('Escribe una cantidad');
+  state.incomes[i].saved = num(state.incomes[i].saved) + a;
+  state.deposits.unshift({ id: Date.now(), income: i, amount: a, date: new Date().toISOString(), name: state.incomes[i].name });
+  
+  e.value = '';
+  const savedInput = document.getElementById(`saved-${i}`);
+  if (savedInput) savedInput.value = state.incomes[i].saved;
+  
+  updateCardCalculations(i);
+  history();
+  save();
+  toast('Depósito agregado');
+}
+
+function removeDeposit(id) {
+  if (!confirm('¿Seguro que deseas eliminar este registro del historial?')) return;
+  const d = state.deposits.find(x => x.id === id);
+  if (!d) return;
+  state.incomes[d.income].saved = Math.max(0, num(state.incomes[d.income].saved) - num(d.amount));
+  state.deposits = state.deposits.filter(x => x.id !== id);
+  
+  const savedInput = document.getElementById(`saved-${d.income}`);
+  if (savedInput) savedInput.value = state.incomes[d.income].saved;
+
+  updateCardCalculations(d.income);
+  history();
+  save();
+}
+
+function resetIncome(i) {
+  if (!confirm('¿Reiniciar este ingreso?')) return;
+  state.incomes[i] = makeIncome(i + 1);
+  state.deposits = state.deposits.filter(x => x.income !== i);
+  renderCards();
+}
+
+function history() {
+  const b = $('history');
+  if (!state.deposits.length) {
+    b.innerHTML = '<div class="empty">Todavía no hay depósitos registrados.</div>';
+    return;
+  }
+  b.innerHTML = state.deposits.map(d => `<div class="entry">
+    <div>
+      <strong>${money(d.amount)}</strong>
+      <small>${esc(d.name || 'Ingreso ' + (d.income + 1))} · ${new Date(d.date).toLocaleDateString('es-US')}</small>
+    </div>
+    <button type="button" class="btn danger" onclick="removeDeposit(${d.id})">Eliminar</button>
+  </div>`).join('');
+}
+
+function exportCSV() {
+  if (!state.deposits.length) return toast('No hay depósitos');
+  const rows = [['Fecha', 'Ingreso', 'Cantidad'], ...state.deposits.slice().reverse().map(d => [new Date(d.date).toLocaleDateString('en-US'), d.name || 'Ingreso ' + (d.income + 1), Number(d.amount).toFixed(2)])];
+  const csv = rows.map(r => r.map(v => '"' + String(v).replaceAll('"', '""') + '"').join(',')).join('
+');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'mi-ahorro.csv';
+  a.click();
+}
+
+$('incomeCount').addEventListener('change', e => {
+  state.incomeCount = +e.target.value;
+  renderCards();
+});
+
+$('deadline').addEventListener('input', e => {
+  state.deadline = e.target.value;
+  for (let i = 0; i < state.incomeCount; i++) {
+    updateCardCalculations(i);
+  }
+  save();
+});
+
+renderCards();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(() => {}));
+}
 </script>
 </body>
 </html>
